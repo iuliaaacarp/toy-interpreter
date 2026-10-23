@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c4a2bf1-3c02-4490-b1e2-27e84f711049" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/exceptions/ADTException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/exceptions/MyException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/adt/IStack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/adt/MyStack.java" afterDir="false" />
+    <list default="true" id="0c4a2bf1-3c02-4490-b1e2-27e84f711049" name="Changes" comment="created exceptions + MyStack">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/adt/IDictionary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/adt/IList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/adt/MyDictionary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/adt/MyList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/java/interpreter/model/adt/MyDictionaryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/java/interpreter/model/adt/MyListTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/java/interpreter/model/adt/MyStackTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/interpreter/App.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/interpreter/AppTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +47,9 @@
     &quot;accountId&quot;: &quot;001af559-a3f2-4f92-9888-1c696c33a753&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2,
   &quot;fromUser&quot;: false
@@ -54,23 +58,26 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/iuliacarp/IdeaProjects/toy-interpreter&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.MyDictionaryTest.executor": "Run",
+    "Gradle.MyListTest.executor": "Run",
+    "Gradle.MyStackTest.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/iuliacarp/IdeaProjects/toy-interpreter",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -91,5 +98,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="created exceptions + MyStack" />
+    <option name="LAST_COMMIT_MESSAGE" value="created exceptions + MyStack" />
   </component>
 </project>
