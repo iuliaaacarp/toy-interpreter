@@ -4,25 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c4a2bf1-3c02-4490-b1e2-27e84f711049" name="Changes" comment="created MyDictionary + MyList + added tests">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/exceptions/ExpressionException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/exp/ArithExp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/exp/ArithOp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/exp/IExp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/exp/LogicExp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/exp/LogicOp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/exp/ValueExp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/exp/VarExp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/type/BoolType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/type/IType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/type/IntType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/value/BoolValue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/value/IValue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/value/IntValue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/java/interpreter/model/exp/ArithExpTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/java/interpreter/model/exp/LogicExpTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/java/interpreter/model/type/TypeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/java/interpreter/model/value/ValueTest.java" afterDir="false" />
+    <list default="true" id="0c4a2bf1-3c02-4490-b1e2-27e84f711049" name="Changes" comment="added expressions (logic + values + types + arithmetic)">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/exceptions/StatementException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/PrgState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/AssignStmt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/CompStmt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/IStmt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/IfStmt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/PrintStmt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/VarDeclStmt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,9 +28,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Exception" />
         <option value="Interface" />
-        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -116,6 +106,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="created exceptions + MyStack" />
     <MESSAGE value="created MyDictionary + MyList + added tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="created MyDictionary + MyList + added tests" />
+    <MESSAGE value="added expressions (logic + values + types + arithmetic)" />
+    <option name="LAST_COMMIT_MESSAGE" value="added expressions (logic + values + types + arithmetic)" />
   </component>
 </project>
