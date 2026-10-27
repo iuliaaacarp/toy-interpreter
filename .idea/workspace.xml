@@ -4,16 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c4a2bf1-3c02-4490-b1e2-27e84f711049" name="Changes" comment="added expressions (logic + values + types + arithmetic)">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/exceptions/StatementException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/PrgState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/AssignStmt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/CompStmt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/IStmt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/IfStmt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/PrintStmt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/VarDeclStmt.java" afterDir="false" />
+    <list default="true" id="0c4a2bf1-3c02-4490-b1e2-27e84f711049" name="Changes" comment="started working on STMT + program state">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/controller/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/NopStmt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/repository/IRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/repository/Repository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/view/Examples.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/java/interpreter/model/stmt/StmtTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/interpreter/model/adt/MyDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/adt/MyDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/CompStmt.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/interpreter/model/stmt/CompStmt.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +68,7 @@
     "Gradle.MyDictionaryTest.executor": "Run",
     "Gradle.MyListTest.executor": "Run",
     "Gradle.MyStackTest.executor": "Run",
+    "Gradle.toy-interpreter [:app:interpreter.Main.main()].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -107,6 +109,7 @@
     <MESSAGE value="created exceptions + MyStack" />
     <MESSAGE value="created MyDictionary + MyList + added tests" />
     <MESSAGE value="added expressions (logic + values + types + arithmetic)" />
-    <option name="LAST_COMMIT_MESSAGE" value="added expressions (logic + values + types + arithmetic)" />
+    <MESSAGE value="started working on STMT" />
+    <option name="LAST_COMMIT_MESSAGE" value="started working on STMT" />
   </component>
 </project>
