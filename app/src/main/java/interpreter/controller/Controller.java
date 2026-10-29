@@ -1,6 +1,5 @@
 package interpreter.controller;
 
-import interpreter.exceptions.ADTException;
 import interpreter.exceptions.MyException;
 import interpreter.exceptions.StatementException;
 import interpreter.model.PrgState;
@@ -17,7 +16,7 @@ public class Controller {
         this.displayFlag = displayFlag;
     }
 
-    public PrgState oneStep(PrgState state) throws MyException, ADTException {
+    public PrgState oneStep(PrgState state) throws MyException {
         IStack<IStmt> stack = state.getExeStack();
         if (stack.isEmpty()) {
             throw new StatementException("program state stack is empty");
@@ -26,7 +25,7 @@ public class Controller {
         return crtStmt.execute(state);
     }
 
-    public void allStep() throws MyException, ADTException {
+    public void allStep() throws MyException {
         PrgState prg = repo.getCrtPrg();
         display(prg);
         while (!prg.getExeStack().isEmpty()) {
