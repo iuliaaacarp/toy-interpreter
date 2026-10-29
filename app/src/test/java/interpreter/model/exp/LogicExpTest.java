@@ -1,6 +1,5 @@
 package interpreter.model.exp;
 
-import interpreter.exceptions.ADTException;
 import interpreter.exceptions.ExpressionException;
 import interpreter.exceptions.MyException;
 import interpreter.model.adt.IDictionary;
@@ -25,7 +24,7 @@ class LogicExpTest {
     }
 
     @Test
-    void evaluatesAndCorrectly() throws MyException, ADTException {
+    void evaluatesAndCorrectly() throws MyException {
         IExp e1 = new LogicExp(LogicOp.AND, bool(true), bool(true));
         assertEquals(new BoolValue(true), e1.eval(symTable));
 
@@ -34,7 +33,7 @@ class LogicExpTest {
     }
 
     @Test
-    void evaluatesOrCorrectly() throws MyException, ADTException {
+    void evaluatesOrCorrectly() throws MyException {
         IExp e1 = new LogicExp(LogicOp.OR, bool(false), bool(true));
         assertEquals(new BoolValue(true), e1.eval(symTable));
 
@@ -48,5 +47,13 @@ class LogicExpTest {
         IExp e = new LogicExp(LogicOp.AND, bool(true), intExp);
         var ex = assertThrows(ExpressionException.class, () -> e.eval(symTable));
         assertEquals("second operand is not a boolean", ex.getMessage());
+    }
+
+    @Test
+    void firstOperandNotBooleanThrows() {
+        IExp intExp = new ValueExp(new IntValue(5));
+        IExp e = new LogicExp(LogicOp.AND, intExp, bool(true));
+        var ex = assertThrows(ExpressionException.class, () -> e.eval(symTable));
+        assertEquals("first operand is not a boolean", ex.getMessage());
     }
 }

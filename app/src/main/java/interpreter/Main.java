@@ -1,7 +1,6 @@
 package interpreter;
 
 import interpreter.controller.Controller;
-import interpreter.exceptions.ADTException;
 import interpreter.exceptions.MyException;
 import interpreter.model.PrgState;
 import interpreter.model.adt.MyDictionary;
@@ -14,7 +13,7 @@ import interpreter.view.Examples;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+     static void main() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("1. Run Example 1: " + Examples.EX1);
@@ -42,7 +41,7 @@ public class Main {
 
             try {
                 controller.allStep();
-            } catch (MyException | ADTException e) {
+            } catch (MyException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }

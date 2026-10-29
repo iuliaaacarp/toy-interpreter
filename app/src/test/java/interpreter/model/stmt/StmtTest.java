@@ -52,7 +52,7 @@ class StmtTest {
 
     @Test
     void typeMismatchInAssignmentThrows() {
-        state.getSymTable().put("v", new IntValue(0)); // Declared as int
+        state.getSymTable().put("v", new IntValue(0));
         var ex = assertThrows(StatementException.class, () -> new AssignStmt("v", new ValueExp(new BoolValue(true))).execute(state));
         assertTrue(ex.getMessage().contains("do not match"));
     }
@@ -71,5 +71,39 @@ class StmtTest {
         var ex = assertThrows(StatementException.class, () ->
                 new IfStmt(new ValueExp(new IntValue(1)), new NopStmt(), new NopStmt()).execute(state));
         assertTrue(ex.getMessage().contains("not a boolean"));
+    }
+
+    @Test
+    void compStmtPushesInCorrectOrder() throws Exception {
+        IStmt s1 = new NopStmt();
+        IStmt s2 = new PrintStmt(new ValueExp(new IntValue(5)));
+
+        new CompStmt(s1, s2).execute(state);
+
+        assertEquals(s1, state.getExeStack().pop());
+        assertEquals(s2, state.getExeStack().pop());
+    }
+
+    @Test
+    void printStmtAddsToOutList() throws Exception {
+        new PrintStmt(new ValueExp(new IntValue(42))).execute(state);
+        assertTrue(state.getOut().toString().contains("42"), "Output list should contain the printed value");
+    }
+
+    @Test
+    void nopStmtDoesNothingToState() throws Exception {
+        PrgState returnedState = new NopStmt().execute(state);
+        assertEquals(state, returnedState, "NopStmt should return the exact same state");
+        assertTrue(state.getExeStack().isEmpty(), "ExeStack should remain empty");
+    }
+
+    @Test
+    void ifStmtPushesElseBranchWhenConditionIsFalse() throws Exception {
+        IStmt thenS = new PrintStmt(new ValueExp(new IntValue(1)));
+        IStmt elseS = new PrintStmt(new ValueExp(new IntValue(2)));
+
+        new IfStmt(new ValueExp(new BoolValue(false)), thenS, elseS).execute(state);
+
+        assertEquals(elseS, state.getExeStack().pop());
     }
 }
