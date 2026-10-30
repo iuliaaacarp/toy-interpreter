@@ -26,4 +26,8 @@ public class Examples {
                                     new AssignStmt("v", new ValueExp(new IntValue(2))),
                                     new AssignStmt("v", new ValueExp(new IntValue(3)))),
                                     new PrintStmt(new VarExp("v"))))));
+
+    public static final IStmt EX4 = new CompStmt(new VarDeclStmt("a", new BoolType()),
+            new CompStmt(new AssignStmt("a", new ValueExp(new IntValue(2))),
+            new PrintStmt(new VarExp("a"))));
 }

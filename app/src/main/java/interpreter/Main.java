@@ -19,6 +19,7 @@ public class Main {
             System.out.println("1. Run Example 1: " + Examples.EX1);
             System.out.println("2. Run Example 2: " + Examples.EX2);
             System.out.println("3. Run Example 3: " + Examples.EX3);
+            System.out.println("4. Run Example 4: " + Examples.EX4);
             System.out.println("0. Exit");
             System.out.print("Choose an option: ");
 
@@ -30,6 +31,7 @@ public class Main {
                 case "1": program = Examples.EX1; break;
                 case "2": program = Examples.EX2; break;
                 case "3": program = Examples.EX3; break;
+                case "4": program = Examples.EX4; break;
                 default:
                     System.out.println("Invalid option");
                     continue;
