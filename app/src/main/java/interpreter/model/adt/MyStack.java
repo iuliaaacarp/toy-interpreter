@@ -4,9 +4,10 @@ import interpreter.exceptions.ADTException;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.List;
 
 public class MyStack<T> implements IStack<T> {
-    private Deque<T> stack = new ArrayDeque<>();
+    private final Deque<T> stack = new ArrayDeque<>();
 
     @Override
     public void push(T item) {
@@ -19,6 +20,13 @@ public class MyStack<T> implements IStack<T> {
             throw new ADTException("Stack is empty");
         }
         return stack.pop();
+    }
+
+    @Override
+    public List<T> toList() {
+        List<T> list = new java.util.ArrayList<>(stack);
+        java.util.Collections.reverse(list);
+        return list;
     }
 
     @Override
