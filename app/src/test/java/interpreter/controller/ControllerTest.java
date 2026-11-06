@@ -23,7 +23,7 @@ class ControllerTest {
     private IStmt invalidProgram;
 
     private static PrgState run(IStmt program) throws MyException {
-        PrgState state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), program);
+        PrgState state = PrgState.of(program);
         new Controller(new Repository(state), false).allStep();
         return state;
     }
@@ -51,7 +51,7 @@ class ControllerTest {
 
     @Test
     void oneStepOnEmptyStackThrows() {
-        PrgState state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new NopStmt());
+        PrgState state = PrgState.of(new NopStmt());
         try { state.getExeStack().pop(); } catch (Exception ignored) {}
         Controller controller = new Controller(new Repository(state), false);
 
@@ -70,7 +70,7 @@ class ControllerTest {
 
     @Test
     void allStepExecutesValidProgramCorrectly() throws MyException {
-        PrgState state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), validProgram);
+        PrgState state = PrgState.of(validProgram);
         IRepository repo = new Repository(state);
 
         Controller controller = new Controller(repo, false);
@@ -84,7 +84,7 @@ class ControllerTest {
 
     @Test
     void allStepThrowsExceptionForInvalidProgram() {
-        PrgState state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), invalidProgram);
+        PrgState state = PrgState.of(invalidProgram);
         IRepository repo = new Repository(state);
         Controller controller = new Controller(repo, false);
 
