@@ -1,67 +1,29 @@
 package interpreter;
 
 import interpreter.controller.Controller;
-import interpreter.exceptions.MyException;
 import interpreter.model.PrgState;
 import interpreter.model.stmt.IStmt;
-import interpreter.repository.IRepository;
 import interpreter.repository.Repository;
 import interpreter.view.Examples;
-import java.util.Scanner;
+import interpreter.view.ExitCommand;
+import interpreter.view.RunExampleCommand;
+import interpreter.view.TextMenu;
+
+import java.util.List;
 
 public class Main {
-static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            printMenu();
-            String option = scanner.nextLine().trim();
-
-            if (option.equals("0")) {
-                System.out.println("Exiting interpreter. Goodbye!");
-                break;
-            }
-
-            IStmt program = switch (option) {
-                case "1" -> Examples.EX1;
-                case "2" -> Examples.EX2;
-                case "3" -> Examples.EX3;
-                case "4" -> Examples.EX4;
-                default -> null;
-            };
-
-            if (program == null) {
-                System.out.println("Invalid option. Please choose 1, 2, 3, 4, or 0.\n");
-                continue;
-            }
-
-            runProgram(program);
+    public static void main(String[] args) {
+        List<IStmt> programs = List.of(Examples.EX1, Examples.EX2, Examples.EX3,
+                Examples.EX4, Examples.EX5);
+        TextMenu menu = new TextMenu();
+        menu.addCommand(new ExitCommand("0", "exit"));
+        for (int i = 0; i < programs.size(); i++) {
+            IStmt program = programs.get(i);
+            var repo = new Repository(PrgState.of(program), "log" + (i + 1) + ".txt");
+            var controller = new Controller(repo, true);
+            menu.addCommand(new RunExampleCommand(String.valueOf(i + 1),
+                    program.toString(), controller));
         }
-
-        scanner.close();
-    }
-
-    private static void printMenu() {
-        System.out.println("==================== MENU ====================");
-        System.out.println("1. Run Example 1: " + Examples.EX1);
-        System.out.println("2. Run Example 2: " + Examples.EX2);
-        System.out.println("3. Run Example 3: " + Examples.EX3);
-        System.out.println("4. Run Example 4: " + Examples.EX4);
-        System.out.println("0. Exit");
-        System.out.println("==============================================");
-        System.out.print("Choose an option: ");
-    }
-
-    private static void runProgram(IStmt program) {
-        PrgState state = PrgState.of(program);
-        IRepository repo = new Repository(state);
-        Controller controller = new Controller(repo, true);
-
-        System.out.println("\n--- Starting Execution ---");
-        try {
-            controller.allStep();
-            System.out.println(">>> Execution finished successfully! Final Out: " + state.getOut() + "\n");
-        } catch (MyException e) {
-            System.out.println(">>> ERROR: " + e.getMessage() + "\n");
-        }
+        menu.show();
     }
 }
