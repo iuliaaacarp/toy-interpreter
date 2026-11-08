@@ -9,6 +9,6 @@ public record StringType() implements IType {
 
     @Override
     public String toString() {
-        return "String";
+        return "string";
     }
 }

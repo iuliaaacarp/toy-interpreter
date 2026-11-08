@@ -1,6 +1,7 @@
 package interpreter.model.adt;
 
 import interpreter.exceptions.ADTException;
+import interpreter.model.value.IntValue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,6 +26,18 @@ class MyDictionaryTest {
         dictionary.put("a", 10);
         dictionary.update("a", 20);
         assertEquals(20, dictionary.lookup("a"));
+    }
+
+    @Test
+    void removeDeletesKey() throws Exception {
+        dictionary.put("a", new IntValue(1).val());
+        dictionary.remove("a");
+        assertFalse(dictionary.isDefined("a"));
+    }
+
+    @Test
+    void removeMissingKeyThrows() {
+        assertThrows(Exception.class, () -> dictionary.remove("missing_key")); // Adjust to ADTException if applicable
     }
 
     @Test

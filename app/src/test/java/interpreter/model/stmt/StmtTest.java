@@ -5,8 +5,10 @@ import interpreter.model.PrgState;
 import interpreter.model.exp.ValueExp;
 import interpreter.model.type.BoolType;
 import interpreter.model.type.IntType;
+import interpreter.model.type.StringType;
 import interpreter.model.value.BoolValue;
 import interpreter.model.value.IntValue;
+import interpreter.model.value.StringValue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -102,5 +104,12 @@ class StmtTest {
         new IfStmt(new ValueExp(new BoolValue(false)), thenS, elseS).execute(state);
 
         assertEquals(elseS, state.getExeStack().pop());
+    }
+
+    @Test
+    void varDeclStringHasEmptyDefaultValue() throws Exception {
+        new VarDeclStmt("s", new StringType()).execute(state);
+        assertTrue(state.getSymTable().isDefined("s"));
+        assertEquals(new StringValue(""), state.getSymTable().lookup("s"));
     }
 }

@@ -20,6 +20,14 @@ class ValueTest {
     }
 
     @Test
+    void stringValueEqualsAndHashCode() {
+        StringValue s1 = new StringValue("test.txt");
+        StringValue s2 = new StringValue("test.txt");
+        assertEquals(s1, s2, "StringValues with identical text should be equal");
+        assertEquals(s1.hashCode(), s2.hashCode(), "Equal StringValues should have identical hashCodes");
+    }
+
+    @Test
     void valuesAreEqualByContent() {
         assertEquals(new IntValue(10), new IntValue(10));
         assertNotEquals(new IntValue(10), new IntValue(5));

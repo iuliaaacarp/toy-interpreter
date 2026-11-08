@@ -3,9 +3,6 @@ package interpreter.controller;
 import interpreter.exceptions.MyException;
 import interpreter.exceptions.StatementException;
 import interpreter.model.PrgState;
-import interpreter.model.adt.MyDictionary;
-import interpreter.model.adt.MyList;
-import interpreter.model.adt.MyStack;
 import interpreter.model.exp.ValueExp;
 import interpreter.model.stmt.*;
 import interpreter.model.type.IntType;
@@ -15,17 +12,44 @@ import interpreter.repository.Repository;
 import interpreter.view.Examples;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
+    @TempDir
+    Path dir;
+
     private IStmt validProgram;
     private IStmt invalidProgram;
 
-    private static PrgState run(IStmt program) throws MyException {
+    private PrgState run(IStmt program) throws MyException {
         PrgState state = PrgState.of(program);
-        new Controller(new Repository(state), false).allStep();
+        var repo = new Repository(state, dir.resolve("log.txt").toString());
+        new Controller(repo, false).allStep();
         return state;
+    }
+
+    @Test
+    void fileExampleReadsBothNumbersAndClosesTheFile() throws Exception {
+        Path in = dir.resolve("test.in");
+        Files.writeString(in, "15\n50\n");
+        PrgState s = run(Examples.fileExample(in.toString()));
+        assertEquals(new IntValue(15), s.getOut().get(0));
+        assertEquals(new IntValue(50), s.getOut().get(1));
+        assertTrue(s.getFileTable().toMap().isEmpty());
+    }
+
+    @Test
+    void logFileContainsTheFourSectionsInOrder() throws Exception {
+        run(Examples.EX1);
+        String log = Files.readString(dir.resolve("log.txt"));
+        int a = log.indexOf("ExeStack:"), b = log.indexOf("SymTable:"),
+                c = log.indexOf("Out:"), d = log.indexOf("FileTable:");
+        assertTrue(0 <= a && a < b && b < c && c < d);
     }
 
     @Test
@@ -50,10 +74,30 @@ class ControllerTest {
     }
 
     @Test
+    void ex4WithEmptyFilePrintsTwoZeros() throws Exception {
+        Path in = dir.resolve("empty.in");
+        Files.writeString(in, "");
+
+        PrgState s = run(Examples.fileExample(in.toString()));
+
+        assertEquals(2, s.getOut().toList().size());
+        assertEquals(new IntValue(0), s.getOut().get(0));
+        assertEquals(new IntValue(0), s.getOut().get(1));
+    }
+
+    @Test
+    void ex5PrintsFiveUsingRelationalOperator() throws Exception {
+        PrgState s = run(Examples.EX5);
+        assertEquals(1, s.getOut().toList().size());
+        assertEquals(new IntValue(5), s.getOut().get(0));
+    }
+
+    @Test
     void oneStepOnEmptyStackThrows() {
         PrgState state = PrgState.of(new NopStmt());
         try { state.getExeStack().pop(); } catch (Exception ignored) {}
-        Controller controller = new Controller(new Repository(state), false);
+
+        Controller controller = new Controller(new Repository(state, dir.resolve("empty.txt").toString()), false);
 
         assertThrows(StatementException.class, () -> controller.oneStep(state));
     }
@@ -71,7 +115,7 @@ class ControllerTest {
     @Test
     void allStepExecutesValidProgramCorrectly() throws MyException {
         PrgState state = PrgState.of(validProgram);
-        IRepository repo = new Repository(state);
+        IRepository repo = new Repository(state, dir.resolve("valid_log.txt").toString());
 
         Controller controller = new Controller(repo, false);
 
@@ -85,7 +129,7 @@ class ControllerTest {
     @Test
     void allStepThrowsExceptionForInvalidProgram() {
         PrgState state = PrgState.of(invalidProgram);
-        IRepository repo = new Repository(state);
+        IRepository repo = new Repository(state, dir.resolve("invalid_log.txt").toString());
         Controller controller = new Controller(repo, false);
 
         var ex = assertThrows(MyException.class, controller::allStep);
