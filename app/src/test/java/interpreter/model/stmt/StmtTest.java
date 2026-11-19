@@ -5,9 +5,11 @@ import interpreter.model.PrgState;
 import interpreter.model.exp.ValueExp;
 import interpreter.model.type.BoolType;
 import interpreter.model.type.IntType;
+import interpreter.model.type.RefType;
 import interpreter.model.type.StringType;
 import interpreter.model.value.BoolValue;
 import interpreter.model.value.IntValue;
+import interpreter.model.value.RefValue;
 import interpreter.model.value.StringValue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -111,5 +113,12 @@ class StmtTest {
         new VarDeclStmt("s", new StringType()).execute(state);
         assertTrue(state.getSymTable().isDefined("s"));
         assertEquals(new StringValue(""), state.getSymTable().lookup("s"));
+    }
+
+    @Test
+    void varDeclRefHasDefaultValueZeroAndLocationType() throws Exception {
+        new VarDeclStmt("r", new RefType(new IntType())).execute(state);
+        assertTrue(state.getSymTable().isDefined("r"));
+        assertEquals(new RefValue(0, new IntType()), state.getSymTable().lookup("r"));
     }
 }

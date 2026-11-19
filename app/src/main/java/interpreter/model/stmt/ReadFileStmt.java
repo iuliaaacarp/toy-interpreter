@@ -4,6 +4,7 @@ import interpreter.exceptions.MyException;
 import interpreter.exceptions.StatementException;
 import interpreter.model.PrgState;
 import interpreter.model.adt.IDictionary;
+import interpreter.model.adt.IHeap;
 import interpreter.model.exp.IExp;
 import interpreter.model.type.IntType;
 import interpreter.model.value.IntValue;
@@ -16,6 +17,7 @@ public record ReadFileStmt(IExp exp, String varName) implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws MyException {
         IDictionary<String, IValue> symTable = state.getSymTable();
+        IHeap heap = state.getHeap();
         IDictionary<StringValue, BufferedReader> fileTable = state.getFileTable();
 
         if (!symTable.isDefined(varName)) {
@@ -25,7 +27,7 @@ public record ReadFileStmt(IExp exp, String varName) implements IStmt {
             throw new StatementException("Variable " + varName + " is not of type int.");
         }
 
-        IValue evaluatedExp = exp.eval(symTable);
+        IValue evaluatedExp = exp.eval(symTable, heap);
         if (!(evaluatedExp instanceof StringValue fileName)) {
             throw new StatementException("Expression " + exp + " does not evaluate to a string.");
         }

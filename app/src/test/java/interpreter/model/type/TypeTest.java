@@ -2,6 +2,7 @@ package interpreter.model.type;
 
 import interpreter.model.value.BoolValue;
 import interpreter.model.value.IntValue;
+import interpreter.model.value.RefValue;
 import interpreter.model.value.StringValue;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,6 +24,28 @@ class TypeTest {
     @Test
     void stringTypeProvidesCorrectDefaultValue() {
         assertEquals(new StringValue(""), new StringType().defaultValue());
+    }
+
+    @Test
+    void refTypeProvidesCorrectDefaultValue() {
+        IType refType = new RefType(new IntType());
+        assertEquals(new RefValue(0, new IntType()), refType.defaultValue());
+    }
+
+    @Test
+    void refTypeEqualityWorksRecursively() {
+        IType refRefInt = new RefType(new RefType(new IntType()));
+        IType refRefIntSame = new RefType(new RefType(new IntType()));
+        IType refInt = new RefType(new IntType());
+
+        assertEquals(refRefInt, refRefIntSame);
+        assertNotEquals(refRefInt, refInt);
+    }
+
+    @Test
+    void refTypeToString() {
+        assertEquals("Ref(int)", new RefType(new IntType()).toString());
+        assertEquals("Ref(Ref(int))", new RefType(new RefType(new IntType())).toString());
     }
 
     @Test

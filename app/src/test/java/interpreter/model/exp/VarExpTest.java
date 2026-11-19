@@ -2,6 +2,7 @@ package interpreter.model.exp;
 
 import interpreter.exceptions.MyException;
 import interpreter.model.adt.MyDictionary;
+import interpreter.model.adt.MyHeap;
 import interpreter.model.value.IValue;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +13,7 @@ class VarExpTest {
         VarExp exp = new VarExp("missingVar");
         MyDictionary<String, IValue> symTable = new MyDictionary<>();
 
-        var ex = assertThrows(MyException.class, () -> exp.eval(symTable));
+        var ex = assertThrows(MyException.class, () -> exp.eval(symTable, new MyHeap()));
         assertTrue(ex.getMessage().contains("is not defined"));
     }
 }

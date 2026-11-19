@@ -3,7 +3,9 @@ package interpreter.model.exp;
 import interpreter.exceptions.ExpressionException;
 import interpreter.exceptions.MyException;
 import interpreter.model.adt.IDictionary;
+import interpreter.model.adt.IHeap;
 import interpreter.model.adt.MyDictionary;
+import interpreter.model.adt.MyHeap;
 import interpreter.model.value.BoolValue;
 import interpreter.model.value.IntValue;
 import interpreter.model.value.IValue;
@@ -13,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LogicExpTest {
     private IDictionary<String, IValue> symTable;
+    private IHeap heap;
 
     private static IExp bool(boolean b) {
         return new ValueExp(new BoolValue(b));
@@ -21,31 +24,32 @@ class LogicExpTest {
     @BeforeEach
     void setUp() {
         symTable = new MyDictionary<>();
+        heap = new MyHeap();
     }
 
     @Test
     void evaluatesAndCorrectly() throws MyException {
         IExp e1 = new LogicExp(LogicOp.AND, bool(true), bool(true));
-        assertEquals(new BoolValue(true), e1.eval(symTable));
+        assertEquals(new BoolValue(true), e1.eval(symTable, heap));
 
         IExp e2 = new LogicExp(LogicOp.AND, bool(true), bool(false));
-        assertEquals(new BoolValue(false), e2.eval(symTable));
+        assertEquals(new BoolValue(false), e2.eval(symTable, heap));
     }
 
     @Test
     void evaluatesOrCorrectly() throws MyException {
         IExp e1 = new LogicExp(LogicOp.OR, bool(false), bool(true));
-        assertEquals(new BoolValue(true), e1.eval(symTable));
+        assertEquals(new BoolValue(true), e1.eval(symTable, heap));
 
         IExp e2 = new LogicExp(LogicOp.OR, bool(false), bool(false));
-        assertEquals(new BoolValue(false), e2.eval(symTable));
+        assertEquals(new BoolValue(false), e2.eval(symTable, heap));
     }
 
     @Test
     void nonBooleanOperandThrows() {
         IExp intExp = new ValueExp(new IntValue(5));
         IExp e = new LogicExp(LogicOp.AND, bool(true), intExp);
-        var ex = assertThrows(ExpressionException.class, () -> e.eval(symTable));
+        var ex = assertThrows(ExpressionException.class, () -> e.eval(symTable, heap));
         assertEquals("second operand is not a boolean", ex.getMessage());
     }
 
@@ -53,7 +57,7 @@ class LogicExpTest {
     void firstOperandNotBooleanThrows() {
         IExp intExp = new ValueExp(new IntValue(5));
         IExp e = new LogicExp(LogicOp.AND, intExp, bool(true));
-        var ex = assertThrows(ExpressionException.class, () -> e.eval(symTable));
+        var ex = assertThrows(ExpressionException.class, () -> e.eval(symTable, heap));
         assertEquals("first operand is not a boolean", ex.getMessage());
     }
 }

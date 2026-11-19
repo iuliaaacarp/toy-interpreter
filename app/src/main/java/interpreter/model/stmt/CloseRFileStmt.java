@@ -4,6 +4,7 @@ import interpreter.exceptions.MyException;
 import interpreter.exceptions.StatementException;
 import interpreter.model.PrgState;
 import interpreter.model.adt.IDictionary;
+import interpreter.model.adt.IHeap;
 import interpreter.model.exp.IExp;
 import interpreter.model.value.IValue;
 import interpreter.model.value.StringValue;
@@ -15,8 +16,9 @@ public record CloseRFileStmt(IExp exp) implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws MyException {
         IDictionary<String, IValue> symTable = state.getSymTable();
+        IHeap heap = state.getHeap();
         IDictionary<StringValue, BufferedReader> fileTable = state.getFileTable();
-        IValue evaluatedExp = exp().eval(symTable);
+        IValue evaluatedExp = exp().eval(symTable, heap);
 
         if (!(evaluatedExp instanceof StringValue fileName)) {
             throw new StatementException("Expression " + exp + " does not evaluate to a string.");
