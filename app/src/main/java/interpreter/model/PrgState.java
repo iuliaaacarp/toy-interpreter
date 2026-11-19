@@ -5,6 +5,7 @@ import interpreter.model.stmt.IStmt;
 import interpreter.model.value.IValue;
 import interpreter.model.value.StringValue;
 import java.io.BufferedReader;
+import java.util.TreeMap;
 
 public class PrgState {
     private final IStack<IStmt> exeStack;
@@ -49,6 +50,8 @@ public class PrgState {
         out.toList().forEach(v -> sb.append(v).append('\n'));
         sb.append("FileTable:\n");
         fileTable.toMap().keySet().forEach(f -> sb.append(f.val()).append('\n'));
+        sb.append("Heap:\n");
+        new TreeMap<>(heap.getContent()).forEach((k, v) -> sb.append(k).append(" --> ").append(v).append('\n'));
         return sb.toString();
     }
 

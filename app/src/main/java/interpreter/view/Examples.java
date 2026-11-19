@@ -57,4 +57,15 @@ public class Examples {
                                             new CompStmt(new AssignStmt("c",
                                                     new RelationalExp(RelOp.NE, new VarExp("a"), new VarExp("b"))
                                             ), new PrintStmt(new VarExp("c"))))))));
+
+    public static final IStmt EX10 =
+            new CompStmt(new VarDeclStmt("v", new IntType()),
+                    new CompStmt(new AssignStmt("v", new ValueExp(new IntValue(4))),
+                            new CompStmt(new WhileStmt(
+                                    new RelationalExp(RelOp.GT, new VarExp("v"), new ValueExp(new IntValue(0))),
+                                    new CompStmt(new PrintStmt(new VarExp("v")),
+                                            new AssignStmt("v", new ArithExp(ArithOp.SUB,
+                                                    new VarExp("v"), new ValueExp(new IntValue(1)))))),
+                                    new PrintStmt(new VarExp("v")))));
+
 }

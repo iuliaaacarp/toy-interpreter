@@ -23,7 +23,10 @@ public class MyHeap implements IHeap {
     }
 
     @Override
-    public IValue get(int address) {
+    public IValue get(int address) throws ADTException {
+        if (!isDefined(address)) {
+            throw new ADTException("Address " + address + " is not defined in the heap");
+        }
         return heap.get(address);
     }
 
@@ -41,6 +44,6 @@ public class MyHeap implements IHeap {
 
     @Override
     public Map<Integer, IValue> getContent() {
-        return heap;
+        return Map.copyOf(heap);
     }
 }
