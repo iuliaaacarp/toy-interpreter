@@ -5,6 +5,8 @@ import interpreter.model.stmt.*;
 import interpreter.model.type.*;
 import interpreter.model.value.*;
 
+import java.beans.Statement;
+
 public class Examples {
     public static IStmt fileExample(String fileName) {
         return new CompStmt(new VarDeclStmt("varf", new StringType()),
@@ -49,7 +51,7 @@ public class Examples {
                                             new PrintStmt(new VarExp("a")),
                                             new PrintStmt(new VarExp("b")))))));
 
-    public static final IStmt EX6 = new CompStmt(new VarDeclStmt("a", new IntType()),
+    public static final IStmt EXA3 = new CompStmt(new VarDeclStmt("a", new IntType()),
             new CompStmt(new VarDeclStmt("b", new IntType()),
                     new CompStmt(new VarDeclStmt("c", new BoolType()),
                             new CompStmt(new AssignStmt("a", new ValueExp(new IntValue(1))),
@@ -57,6 +59,32 @@ public class Examples {
                                             new CompStmt(new AssignStmt("c",
                                                     new RelationalExp(RelOp.NE, new VarExp("a"), new VarExp("b"))
                                             ), new PrintStmt(new VarExp("c"))))))));
+
+    public static final IStmt EX6 = new CompStmt(new VarDeclStmt("v", new RefType(new IntType())),
+            new CompStmt( new NewStmt("v", new ValueExp(new IntValue(20))),
+                    new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
+                            new CompStmt( new NewStmt("a", new VarExp("v")),
+                            new CompStmt( new PrintStmt(new VarExp("v")), new PrintStmt(new VarExp("a")))))));
+
+    public static final IStmt EX7 = new CompStmt(new VarDeclStmt("v", new RefType(new IntType())),
+            new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                    new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
+                            new CompStmt(new NewStmt("a", new VarExp("v")),
+                                    new CompStmt(
+                                    new PrintStmt(new ReadHeapExp(new VarExp("v"))),
+                                    new PrintStmt(new ArithExp(ArithOp.ADD, (
+                                            new ReadHeapExp(new ReadHeapExp(new VarExp("a")))),
+                                            new ValueExp(new IntValue(5)))))))));
+
+    public static final IStmt EX8 = new CompStmt(
+            new VarDeclStmt("v", new RefType(new IntType())),
+            new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                    new CompStmt(new PrintStmt(new ReadHeapExp(new VarExp("v"))),
+                            new CompStmt(new WriteHeapStmt("v", new ValueExp(new IntValue(30))),
+                                    new PrintStmt(new ArithExp(
+                                            ArithOp.ADD,
+                                            new ReadHeapExp(new VarExp("v")),
+                                            new ValueExp(new IntValue(5))))))));
 
     public static final IStmt EX10 =
             new CompStmt(new VarDeclStmt("v", new IntType()),

@@ -24,5 +24,6 @@ public final class GarbageCollector {
 
     public static Map<Integer, IValue> safeGarbageCollector(Set<Integer> symTableAddr, Map<Integer, IValue> heap) {
         //TODO -- safe garbage collector
+        return ;
     }
 }
