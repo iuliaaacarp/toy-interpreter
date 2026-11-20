@@ -5,8 +5,6 @@ import interpreter.model.stmt.*;
 import interpreter.model.type.*;
 import interpreter.model.value.*;
 
-import java.beans.Statement;
-
 public class Examples {
     public static IStmt fileExample(String fileName) {
         return new CompStmt(new VarDeclStmt("varf", new StringType()),
@@ -85,6 +83,13 @@ public class Examples {
                                             ArithOp.ADD,
                                             new ReadHeapExp(new VarExp("v")),
                                             new ValueExp(new IntValue(5))))))));
+
+    public static final IStmt EX9 = new CompStmt(new VarDeclStmt("v", new RefType(new IntType())),
+            new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                    new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
+                            new CompStmt(new NewStmt("a", new VarExp("v")),
+                                new CompStmt(new NewStmt("v", new ValueExp(new IntValue(30))),
+                                        new PrintStmt(new ReadHeapExp(new ReadHeapExp(new VarExp("a")))))))));
 
     public static final IStmt EX10 =
             new CompStmt(new VarDeclStmt("v", new IntType()),
