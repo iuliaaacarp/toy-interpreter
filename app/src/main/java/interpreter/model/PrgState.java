@@ -60,6 +60,7 @@ public class PrgState {
         return "ExeStack:\n" + exeStack.toString() + "\n" +
                 "SymTable:\n" + symTable.toString() + "\n" +
                 "Out:\n" + out.toString() + "\n" +
-                "FileTable:\n" + fileTable.toString() + "\n";
+                "FileTable:\n" + fileTable.toString() + "\n" +
+                "Heap:\n" + heap.toString() + "\n";
     }
 }

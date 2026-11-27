@@ -46,4 +46,7 @@ public class MyHeap implements IHeap {
     public Map<Integer, IValue> getContent() {
         return Map.copyOf(heap);
     }
+
+    @Override
+    public String toString() {return heap.toString();}
 }
